@@ -2,6 +2,7 @@
 
 use std::fmt::Debug;
 
+/// taken from bincode/tests/std.rs & bincode/tests/utils.rs
 pub trait TheSameTrait: bincode::Encode + bincode::Decode + Debug + 'static {}
 impl<T> TheSameTrait for T where T: bincode::Encode + bincode::Decode + Debug + 'static {}
 
@@ -26,11 +27,13 @@ fn set() {
     the_same(set);
 }
 
-#[allow(dead_code)] // This is not used in every test
+/// taken from bincode/tests/std.rs & bincode/tests/utils.rs
+#[allow(dead_code)]
 pub fn the_same<V: TheSameTrait + PartialEq>(element: V) {
     the_same_with_comparer(element, |a, b| a == b);
 }
 
+/// taken from bincode/tests/std.rs & bincode/tests/utils.rs
 pub fn the_same_with_comparer<V, CMP>(element: V, cmp: CMP)
     where
         V: TheSameTrait,
@@ -99,6 +102,7 @@ pub fn the_same_with_comparer<V, CMP>(element: V, cmp: CMP)
     );
 }
 
+/// taken from bincode/tests/std.rs & bincode/tests/utils.rs
 fn the_same_with_config<V, C, CMP>(element: &V, config: C, cmp: CMP)
     where
         V: TheSameTrait,
